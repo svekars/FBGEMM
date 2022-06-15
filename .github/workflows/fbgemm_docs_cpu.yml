@@ -31,16 +31,28 @@ jobs:
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
         bash ~/miniconda.sh -b -p $HOME/miniconda
-    - name: Install CUDA 11.7
-      shell: bash
+    - name: Install yum
+        sudo apt update -y
+        sudo apt-get install rpm
+        sudo apt install -y yum-utils
+      run: 
+    - name: Install CUDA
+      run: 
+        sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
+        sudo yum clean expire-cache
+        sudo yum install -y nvidia-driver-latest-dkms
+        sudo yum install -y cuda-11-3
+        sudo yum install -y cuda-drivers
+        sudo yum install -y libcudnn8-devel
+    - name: Install cudNN
       run: |
+        wget https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.pin 
+        sudo mv cuda-${OS}.pin /etc/apt/preferences.d/cuda-repository-pin-600
+        sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/7fa2af80.pub
+        sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
         sudo apt-get update
-        wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
-        sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-        sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
-        sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
-        sudo apt-get update
-        sudo apt-get -y install cuda
+        sudo apt-get install libcudnn8==8.4.1
     - name: setup Path
       run: |
         echo "/home/ec2-user/miniconda/bin" >> $GITHUB_PATH
