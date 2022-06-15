@@ -32,10 +32,10 @@ jobs:
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
         bash ~/miniconda.sh -b -p $HOME/miniconda
     - name: Install yum
+      run:
         sudo apt update -y
         sudo apt-get install rpm
         sudo apt install -y yum-utils
-      run: 
     - name: Install CUDA
       run: 
         sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
