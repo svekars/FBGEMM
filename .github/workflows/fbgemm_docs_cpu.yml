@@ -25,9 +25,10 @@ jobs:
         git log
     - name: Update pip
       run: |
-        sudo yum update -y
-        sudo yum -y install git python3-pip
-        sudo pip3 install --upgrade pip
+        sudo apt-get install -y python-setuptools
+        sudo apt-get install -y python3-sphinx
+        python3 -m pip install --upgrade pip
+        python3 -m pip install setuptools
     - name: Setup conda
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
