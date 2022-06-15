@@ -25,8 +25,7 @@ jobs:
         git log
     - name: Install yum
       run: |
-        wget http://mirror.centos.org/centos/6/os/x86_64/Packages/yum-3.2.29-81.el6.centos.noarch.rpm
-        rpm -ivh yum-3.2.29-81.el6.centos.noarch.rpm
+        sudo apt-get -y install yum
     - name: Update pip
       run: |
         sudo yum update -y
