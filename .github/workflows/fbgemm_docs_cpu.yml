@@ -28,8 +28,8 @@ jobs:
         sudo apt-get -y install yum
     - name: Update pip
       run: |
-        sudo yum update -y
-        sudo yum -y install git python3-pip
+        sudo 
+        sudo apt-get install git python3-pip
         sudo pip3 install --upgrade pip
     - name: Setup conda
       run: |
