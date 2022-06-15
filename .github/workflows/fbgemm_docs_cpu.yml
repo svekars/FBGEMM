@@ -41,7 +41,7 @@ jobs:
         sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/7fa2af80.pub
         sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
         sudo apt-get update
-        sudo apt-get install libcudnn8==8.4.1
+        sudo apt-get install libcudnn8
     - name: setup Path
       run: |
         echo "/home/ec2-user/miniconda/bin" >> $GITHUB_PATH
