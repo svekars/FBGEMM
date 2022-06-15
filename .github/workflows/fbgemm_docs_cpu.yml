@@ -33,7 +33,7 @@ jobs:
         bash ~/miniconda.sh -b -p $HOME/miniconda
     - name: Install yum
       run:
-        sudo apt update -y
+        sudo apt-get update -y
         sudo apt-get install rpm
         sudo apt install -y yum-utils
     - name: Install CUDA
