@@ -35,9 +35,7 @@ jobs:
       shell: bash
       run: |
         sudo apt-get update
-        sudo apt-get install cuda
-        sudo apt-get install libcudnn8-dev
-        sudo apt-get install nvidia-gds
+        sudo apt install nvidia-cuda-toolkit
     - name: setup Path
       run: |
         echo "/home/ec2-user/miniconda/bin" >> $GITHUB_PATH
