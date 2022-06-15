@@ -31,6 +31,13 @@ jobs:
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
         bash ~/miniconda.sh -b -p $HOME/miniconda
+    - name: Install CUDA 11.3
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install cuda
+        sudo apt-get install libcudnn8-dev
+        sudo apt-get install nvidia-gds
     - name: setup Path
       run: |
         echo "/home/ec2-user/miniconda/bin" >> $GITHUB_PATH
