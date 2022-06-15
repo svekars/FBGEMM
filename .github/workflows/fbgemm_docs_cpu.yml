@@ -34,8 +34,7 @@ jobs:
     - name: Install yum
       run:
         sudo apt-get update -y
-        sudo apt-get install rpm
-        sudo apt install -y yum-utils
+        sudo apt-get install -y yum
     - name: Install CUDA
       run: 
         sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
