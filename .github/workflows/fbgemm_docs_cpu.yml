@@ -65,7 +65,7 @@ jobs:
         echo "torch.distributed succeeded"
     - name: Install fbgemm_gpu nightly
       run: |
-        conda run -n build_binary python -m pip install fbgemm-gpu-nightly-cpu
+        conda run -n build_binary python -m pip install fbgemm-gpu-nightly
     - name: Test fbgemm_gpu installation
       shell: bash
       run: |
