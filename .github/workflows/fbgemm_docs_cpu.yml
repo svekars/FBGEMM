@@ -75,9 +75,20 @@ jobs:
         echo "skbuild succeeded"
         conda run -n build_binary python -c "import numpy"
         echo "numpy succeeded"
-    - name: Install fbgemm_gpu_cpu nightly
+    - name: Build fbgemm_gpu_ cpu-only
       run: |
-        conda run -n build_binary python -m pip install fbgemm-gpu-nightly-cpu
+        cd fbgemm_gpu/
+        rm -r dist || true 
+        conda run -n build_binary \
+          python setup.py bdist_wheel \
+          --package_name fbgemm_gpu_nightly-cpu \
+          --cpu_only \
+          --python-tag=3.9
+          --plat-name=manylinux1_x86_64
+        ls -lt dist/*.whl
+    - name: Install fbgemm_gpu
+      run: |
+        conda run -n build_binary python -m pip install fbgemm_gpu/dist/fbgemm_gpu_nightly_cpu-*.whl
     - name: Test fbgemm_gpu installation
       shell: bash
       run: |
