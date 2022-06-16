@@ -54,6 +54,7 @@ jobs:
       shell: bash
       run: |
         wget https://developer.download.nvidia.com/compute/cuda/11.3.0/local_installers/cuda_11.3.0_465.19.01_linux.run -O ~/cuda_11.3.0_465.19.01_linux.run
+        chmod +x $HOME/cuda_11.3.0_465.19.01_linux.run
         sudo bash -b -p $HOME/cuda_11.3.0_465.19.01_linux.run
     - name: setup CUDA Path
       run: |
