@@ -75,16 +75,10 @@ jobs:
         echo "skbuild succeeded"
         conda run -n build_binary python -c "import numpy"
         echo "numpy succeeded"
-    - name: Build fbgemm_gpu
+    - name: Install fbgemm_gpu
       shell: bash
       run: |
-        cd ./fbgemm_gpu
-        conda run -n build_binary git submodule sync
-        conda run -n build_binary git submodule update --init --recursive
-        conda run -n build_binary export CUDA_BIN_PATH=/usr/local/cuda-11.3/
-        conda run -n build_binary export CUDACXX=/usr/local/cuda-11.3/bin/nvcc
-        conda run -n build_binary python setup.py install
-        cd ..
+        conda run -n build_binary python -m pip install fbgemm-gpu
     - name: Test fbgemm_gpu installation
       shell: bash
       run: |
