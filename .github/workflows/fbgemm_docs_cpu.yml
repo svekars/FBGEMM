@@ -51,22 +51,12 @@ jobs:
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
     - name: Install Dependencies
-      shell: bash
       run: |
-        sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-        sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
-        sudo yum clean expire-cache
-        sudo yum install -y nvidia-driver-latest-dkms
-        sudo yum install -y cuda-11-3
-        sudo yum install -y cuda-drivers
-        sudo yum install -y libcudnn8-devel|
+        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch-nightly
     - name: setup CUDA Path
       run: |
         echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
         echo /usr/local/bin >> $GITHUB_PATH
-    - name: nvcc check
-      run: |
-        nvcc --version
     - name: Install fbgemm_gpu/requirements.txt
       shell: bash
       run: |
