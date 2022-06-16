@@ -58,6 +58,13 @@ jobs:
       run: |
         cd fbgemm_gpu
         conda run -n build_binary python -m pip install -r requirements.txt
+    - name: setup CUDA Path
+      run: |
+        echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
+        echo /usr/local/bin >> $GITHUB_PATH
+    - name: nvcc check
+      run: |
+        nvcc --version
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
