@@ -50,13 +50,16 @@ jobs:
     - name: Setup Path
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
-    - name: Install Dependencies
       run: |
-        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch-nightly
+        conda run -n build_binary wget https://developer.download.nvidia.com/compute/cuda/11.3.0/local_installers/cuda_11.3.0_465.19.01_linux.run
+        conda run -n build_binary sudo sh cuda_11.3.0_465.19.01_linux.run
     - name: setup CUDA Path
       run: |
         echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
         echo /usr/local/bin >> $GITHUB_PATH
+    - name: Check nvcc
+      run: |
+        nvcc --version
     - name: Install fbgemm_gpu/requirements.txt
       shell: bash
       run: |
@@ -75,7 +78,7 @@ jobs:
         echo "skbuild succeeded"
         conda run -n build_binary python -c "import numpy"
         echo "numpy succeeded"
-    - name: Build fbgemm_gpu_ cpu-only
+    - name: Build fbgemm_gpu cpu-only
       run: |
         cd fbgemm_gpu/
         rm -r dist || true 
