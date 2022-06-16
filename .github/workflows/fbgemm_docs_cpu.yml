@@ -51,13 +51,15 @@ jobs:
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
     - name: Install Dependencies
-      run: |
-        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch
-    - name: Install fbgemm_gpu/requirements.txt
       shell: bash
       run: |
-        cd fbgemm_gpu
-        conda run -n build_binary python -m pip install -r requirements.txt
+        sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+        sudo yum-config-manager --add-repo https://developer.download.nvidia.com/compute/cuda/repos/rhel7/x86_64/cuda-rhel7.repo
+        sudo yum clean expire-cache
+        sudo yum install -y nvidia-driver-latest-dkms
+        sudo yum install -y cuda-11-3
+        sudo yum install -y cuda-drivers
+        sudo yum install -y libcudnn8-devel|
     - name: setup CUDA Path
       run: |
         echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
@@ -65,6 +67,11 @@ jobs:
     - name: nvcc check
       run: |
         nvcc --version
+    - name: Install fbgemm_gpu/requirements.txt
+      shell: bash
+      run: |
+        cd fbgemm_gpu
+        conda run -n build_binary python -m pip install -r requirements.txt
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
