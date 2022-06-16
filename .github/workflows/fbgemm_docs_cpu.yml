@@ -75,10 +75,14 @@ jobs:
         echo "skbuild succeeded"
         conda run -n build_binary python -c "import numpy"
         echo "numpy succeeded"
-    - name: Install fbgemm_gpu
+    - name: Install fbgemm_gpu_cpu nightly
+      run: |
+        conda run -n build_binary python -m pip install fbgemm-gpu-nightly-cpu
+    - name: Test fbgemm_gpu installation
       shell: bash
       run: |
-        conda run -n build_binary python -m pip install fbgemm-gpu
+        conda run -n build_binary \
+          python -c "import fbgemm_gpu"
     - name: Build the docset
       run: |
         conda run -n build_binary python -m pip install -r fbgemm_gpu/docs/requirements.txt
