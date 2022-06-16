@@ -79,11 +79,6 @@ jobs:
       shell: bash
       run: |
         conda run -n build_binary python -m pip install fbgemm-gpu
-    - name: Test fbgemm_gpu installation
-      shell: bash
-      run: |
-        conda run -n build_binary \
-          python -c "import fbgemm_gpu"
     - name: Build the docset
       run: |
         conda run -n build_binary python -m pip install -r fbgemm_gpu/docs/requirements.txt
