@@ -52,9 +52,9 @@ jobs:
         echo /usr/local/bin >> $GITHUB_PATH
     - name: Install Dependencies
       run:
+        conda run -n build_binary conda install -y scikit-build jinja2 ninja cmake hypothesis
+        conda run -n build_binary conda install -y pytorch cudatoolkit=11.3 -c pytorch-nightly
         conda run -n build_binary conda install -c conda-forge cudatoolkit-dev
-        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch-nightly
-        conda run -n build_binary conda install scikit-build jinja2 ninja cmake hypothesis
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
