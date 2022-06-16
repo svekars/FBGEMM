@@ -53,8 +53,8 @@ jobs:
     - name: Install CUDA
       shell: bash
       run: |
-        conda run -n build_binary wget https://developer.download.nvidia.com/compute/cuda/11.3.0/local_installers/cuda_11.3.0_465.19.01_linux.run -O ~/cuda_11.3.0_465.19.01_linux.run
-        conda run -n build_binary sudo bash -b -p $HOME/cuda_11.3.0_465.19.01_linux.run
+        wget https://developer.download.nvidia.com/compute/cuda/11.3.0/local_installers/cuda_11.3.0_465.19.01_linux.run -O ~/cuda_11.3.0_465.19.01_linux.run
+        sudo bash -b -p $HOME/cuda_11.3.0_465.19.01_linux.run
     - name: setup CUDA Path
       run: |
         echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
