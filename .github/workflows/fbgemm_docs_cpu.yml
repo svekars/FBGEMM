@@ -53,10 +53,21 @@ jobs:
     - name: Install Dependencies
       run:
         conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch
+        cd ./fbgemm_gpu
+        conda run -n build_binary python -m pip install -r requirements.txt
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
         echo "torch.distributed succeeded"
+     - name: Test Installation of dependencies
+      run: |
+        cd fbgemm_gpu/
+        conda run -n build_binary python -c "import torch.distributed"
+        echo "torch.distributed succeeded"
+        conda run -n build_binary python -c "import skbuild"
+        echo "skbuild succeeded"
+        conda run -n build_binary python -c "import numpy"
+        echo "numpy succeeded"
     - name: Build fbgemm_gpu
       run: |
         cd ./fbgemm_gpu
