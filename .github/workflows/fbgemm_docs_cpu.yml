@@ -31,17 +31,11 @@ jobs:
       run: |
         wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh
         bash ~/miniconda.sh -b -p $HOME/miniconda
-    - name: Install CUDA
+    - name: Install Dependencies
       run:
         conda install -c conda-forge cudatoolkit-dev
-    - name: Install cudNN
-      run: |
-        wget https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/cuda-${OS}.pin 
-        sudo mv cuda-${OS}.pin /etc/apt/preferences.d/cuda-repository-pin-600
-        sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/7fa2af80.pub
-        sudo add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
-        sudo apt-get update
-        sudo apt-get install libcudnn8
+        conda install pytorch cudatoolkit=11.3 -c pytorch-nightly
+        conda install scikit-build jinja2 ninja cmake hypothesis
     - name: setup Path
       run: |
         echo "/home/ec2-user/miniconda/bin" >> $GITHUB_PATH
@@ -56,8 +50,8 @@ jobs:
     - name: Install gcc
       shell: bash
       run: |
-        sudo apt update
-        sudo apt install build-essential
+        conda run -n build_binary sudo apt update
+        conda run -n build_binary sudo apt install build-essential
     - name: Setup Path
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
@@ -69,9 +63,15 @@ jobs:
       run: |
         conda run -n build_binary python -c "import torch.distributed"
         echo "torch.distributed succeeded"
-    - name: Install fbgemm_gpu nightly
+    - name: Build fbgemm_gpu
       run: |
-        conda run -n build_binary python -m pip install fbgemm-gpu-nightly
+        cd ./fbgemm_gpu
+        conda run -n build_binary git submodule sync
+        conda run -n build_binary git submodule update --init --recursive
+        conda run -n build_binary export CUDA_BIN_PATH=/usr/local/cuda-11.3/
+        conda run -n build_binary export CUDACXX=/usr/local/cuda-11.3/bin/nvcc
+        conda run -n build_binary python setup.py install
+        cd ..
     - name: Test fbgemm_gpu installation
       shell: bash
       run: |
