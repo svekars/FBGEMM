@@ -51,9 +51,12 @@ jobs:
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
     - name: Install Dependencies
-      run:
+      run: |
         conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch
-        cd ./fbgemm_gpu
+    - name: Install fbgemm_gpu/requirements.txt
+      shell: bash
+      run: |
+        cd fbgemm_gpu
         conda run -n build_binary python -m pip install -r requirements.txt
     - name: Test PyTorch Installation
       run: |
@@ -69,6 +72,7 @@ jobs:
         conda run -n build_binary python -c "import numpy"
         echo "numpy succeeded"
     - name: Build fbgemm_gpu
+      shell: bash
       run: |
         cd ./fbgemm_gpu
         conda run -n build_binary git submodule sync
