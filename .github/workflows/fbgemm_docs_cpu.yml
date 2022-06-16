@@ -52,7 +52,7 @@ jobs:
         echo /usr/local/bin >> $GITHUB_PATH
     - name: Install Dependencies
       run:
-        conda install pytorch cudatoolkit=11.3 -c pytorch
+        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
