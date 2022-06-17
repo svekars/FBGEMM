@@ -18,4 +18,4 @@ API Documentation
    :maxdepth: 2
    :caption: Contents
 
-   fbgemm_gpu.fbgemm_gpu.rst
+   fbgemm_gpu.rst
