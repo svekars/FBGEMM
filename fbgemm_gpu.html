@@ -10,7 +10,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>fbgemm_gpu.fbgemm_gpu &mdash; fbgemm 0.1.2 documentation</title>
+  <title>fbgemm_gpu &mdash; fbgemm 0.1.2 documentation</title>
   
 
   
@@ -232,7 +232,7 @@
             
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">fbgemm_gpu.fbgemm_gpu</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">fbgemm_gpu</a></li>
 </ul>
 
             
@@ -273,7 +273,7 @@
       </li>
 
         
-      <li>fbgemm_gpu.fbgemm_gpu</li>
+      <li>fbgemm_gpu</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -305,13 +305,33 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <section id="fbgemm-gpu-fbgemm-gpu">
-<h1>fbgemm_gpu.fbgemm_gpu<a class="headerlink" href="#fbgemm-gpu-fbgemm-gpu" title="Permalink to this heading">¶</a></h1>
-<section id="fbgemm-gpu-fbgemm-gpu-batched-unary-embeddings-ops">
-<h2>fbgemm_gpu.fbgemm_gpu.batched_unary_embeddings_ops<a class="headerlink" href="#fbgemm-gpu-fbgemm-gpu-batched-unary-embeddings-ops" title="Permalink to this heading">¶</a></h2>
+  <section id="module-fbgemm_gpu">
+<span id="fbgemm-gpu"></span><h1>fbgemm_gpu<a class="headerlink" href="#module-fbgemm_gpu" title="Permalink to this heading">¶</a></h1>
+<section id="module-fbgemm_gpu.batched_unary_embeddings_ops">
+<span id="fbgemm-gpu-batched-unary-embeddings-ops"></span><h2>fbgemm_gpu.batched_unary_embeddings_ops<a class="headerlink" href="#module-fbgemm_gpu.batched_unary_embeddings_ops" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="fbgemm_gpu.batched_unary_embeddings_ops.BatchedUnaryEmbeddingBag">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">fbgemm_gpu.batched_unary_embeddings_ops.</span></span><span class="sig-name descname"><span class="pre">BatchedUnaryEmbeddingBag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_tasks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hash_sizes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">long_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fbgemm_gpu.batched_unary_embeddings_ops.BatchedUnaryEmbeddingBag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="fbgemm_gpu.batched_unary_embeddings_ops.BatchedUnaryEmbeddingBag.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offsets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fbgemm_gpu.batched_unary_embeddings_ops.BatchedUnaryEmbeddingBag.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 </section>
-<section id="fbgemm-gpu-fbgemm-gpu-enums">
-<h2>fbgemm_gpu.fbgemm_gpu.enums<a class="headerlink" href="#fbgemm-gpu-fbgemm-gpu-enums" title="Permalink to this heading">¶</a></h2>
+<section id="module-fbgemm_gpu.enums">
+<span id="fbgemm-gpu-enums"></span><h2>fbgemm_gpu.enums<a class="headerlink" href="#module-fbgemm_gpu.enums" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -356,9 +376,9 @@
           <div class="pytorch-right-menu" id="pytorch-right-menu">
             <div class="pytorch-side-scroll" id="pytorch-side-scroll-right">
               <ul>
-<li><a class="reference internal" href="#">fbgemm_gpu.fbgemm_gpu</a><ul>
-<li><a class="reference internal" href="#fbgemm-gpu-fbgemm-gpu-batched-unary-embeddings-ops">fbgemm_gpu.fbgemm_gpu.batched_unary_embeddings_ops</a></li>
-<li><a class="reference internal" href="#fbgemm-gpu-fbgemm-gpu-enums">fbgemm_gpu.fbgemm_gpu.enums</a></li>
+<li><a class="reference internal" href="#">fbgemm_gpu</a><ul>
+<li><a class="reference internal" href="#module-fbgemm_gpu.batched_unary_embeddings_ops">fbgemm_gpu.batched_unary_embeddings_ops</a></li>
+<li><a class="reference internal" href="#module-fbgemm_gpu.enums">fbgemm_gpu.enums</a></li>
 </ul>
 </li>
 </ul>
