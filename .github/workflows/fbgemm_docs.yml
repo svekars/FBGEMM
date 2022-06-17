@@ -6,7 +6,10 @@ on:
       - main
 jobs:
   build_docs_job:
-    runs-on: linux.2xlarge
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -22,8 +25,7 @@ jobs:
         git log
     - name: Update pip
       run: |
-        sudo yum update -y
-        sudo yum -y install git python3-pip
+        sudo apt-get install git python3-pip
         sudo pip3 install --upgrade pip
     - name: Setup conda
       run: |
@@ -43,19 +45,37 @@ jobs:
     - name: Install gcc
       shell: bash
       run: |
-        sudo yum group install -y "Development Tools"
+        conda run -n build_binary sudo apt update
+        conda run -n build_binary sudo apt install build-essential
     - name: Setup Path
       run: |
         echo /usr/local/bin >> $GITHUB_PATH
-    - name: Install PyTorch
+    - name: Install Dependencies
+      run: |
+        conda run -n build_binary conda install pytorch cudatoolkit=11.3 -c pytorch-nightly
+    - name: setup CUDA Path
+      run: |
+        echo /usr/local/cuda-11.3/bin >> $GITHUB_PATH
+        echo /usr/local/bin >> $GITHUB_PATH
+    - name: Install fbgemm_gpu/requirements.txt
       shell: bash
       run: |
-        conda run -n build_binary python -m pip install --pre torch -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html
+        cd fbgemm_gpu
+        conda run -n build_binary python -m pip install -r requirements.txt
     - name: Test PyTorch Installation
       run: |
         conda run -n build_binary python -c "import torch.distributed"
         echo "torch.distributed succeeded"
-    - name: Install fbgemm_gpu nightly
+    - name: Test Installation of dependencies
+      run: |
+        cd fbgemm_gpu/
+        conda run -n build_binary python -c "import torch.distributed"
+        echo "torch.distributed succeeded"
+        conda run -n build_binary python -c "import skbuild"
+        echo "skbuild succeeded"
+        conda run -n build_binary python -c "import numpy"
+        echo "numpy succeeded"
+    - name: Install fbgemm_gpu_cpu nightly
       run: |
         conda run -n build_binary python -m pip install fbgemm-gpu-nightly-cpu
     - name: Test fbgemm_gpu installation
@@ -76,4 +96,4 @@ jobs:
       with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: docs/build/html # The folder the action should deploy.
+          FOLDER: ./fbgemm_gpu/docs/build/html # The folder the action should deploy.
